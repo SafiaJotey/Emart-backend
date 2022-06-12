@@ -16,7 +16,30 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    console.log('database connecte successfully');
+
+    const database = client.db('addidas_db');
+    const productsCollection = database.collection('products');
+    //get products
+    app.get('/products', async (req, res) => {
+      const cursor = await productsCollection.find({});
+      const count = await productsCollection.countDocuments({});
+      console.log(count);
+      console.log(req.query);
+      const page = req.query.page;
+      const size = parseInt(req.query.size);
+      console.log(page, size);
+      let products;
+      if (page) {
+        products = await cursor
+          .skip(page * 8)
+          .limit(8)
+          .toArray();
+      } else {
+        products = await cursor.toArray();
+      }
+
+      res.send({ products, count });
+    });
   } finally {
   }
 }
@@ -26,9 +49,8 @@ async function run() {
 //   client.close();
 //});
 run().catch(console.dir);
-
 app.get('/', (req, res) => {
-  res.send('Addidas Running');
+  res.send('Addidas is running');
 });
 
 app.listen(port, () => {

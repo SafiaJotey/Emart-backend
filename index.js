@@ -19,6 +19,7 @@ async function run() {
 
     const database = client.db('addidas_db');
     const productsCollection = database.collection('products');
+    const ordersCollection = database.collection('orders');
     //get products
     app.get('/products', async (req, res) => {
       const cursor = await productsCollection.find({});
@@ -39,6 +40,14 @@ async function run() {
       }
 
       res.send({ products, count });
+    });
+
+    // save order information
+    app.post('/order', async (req, res) => {
+      const data = req.body;
+
+      const document = await ordersCollection.insertOne(data);
+      res.json(document);
     });
   } finally {
   }

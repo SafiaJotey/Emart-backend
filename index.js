@@ -24,12 +24,13 @@ async function run() {
     const commentCollection = database.collection('comment');
     //get products
     app.get('/products', async (req, res) => {
-      console.log(hites);
+      console.log('hites');
+      console.log(req.query);
       const cursor = await productsCollection.find({});
       const count = await productsCollection.countDocuments({});
       // const review = await productsCollection
       console.log(count);
-      console.log(req.query);
+
       const page = req.query.page;
       const size = parseInt(req.query.size);
       console.log(page, size);

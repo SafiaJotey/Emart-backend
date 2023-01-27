@@ -13,6 +13,7 @@ const productRoutes = require('./Routes/v1/product.route');
 const reviewProductRoutes = require('./Routes/v1/reviewProduct.route');
 const authRoutes = require('./Routes/v1/auth.route');
 const paymentRoutes = require('./Routes/v1/paymentRoute');
+const orderRoutes = require('./Routes/v1/orderRoute');
 connectToServer((err) => {
   if (!err) {
     app.listen(port, () => {
@@ -22,6 +23,7 @@ connectToServer((err) => {
     app.use('/api/v1/review', reviewProductRoutes);
     app.use('/api/v1/auth', authRoutes);
     app.use('/api/v1/payment', paymentRoutes);
+    app.use('/api/v1/order', orderRoutes);
   } else {
     err;
   }

@@ -5,3 +5,14 @@ exports.createProductService = async (payment) => {
   const result = await stripe.paymentIntents.create(payment);
   return result;
 };
+
+// exports.bookingtoPayServices = async (bookingId) => {
+//   const db = getDb();
+//   console.log(bookingId);
+
+//   const result = await db
+//     .collection('bookings')
+//     .find({ _id: ObjectId(bookingId) })
+//     .toArray();
+//   return result;
+// };

@@ -7,6 +7,15 @@ exports.getProductService = async () => {
   const total = await db.collection('products').countDocuments({});
   return { product, total };
 };
+exports.getPopularProductService = async () => {
+  const db = getDb();
+  const product = await db
+    .collection('products')
+    .find({ ratings: 5 })
+    .toArray();
+  console.log(product);
+  return product;
+};
 exports.getProductServiceByPage = async (page, limit) => {
   const db = getDb();
   const lim = parseInt(limit);

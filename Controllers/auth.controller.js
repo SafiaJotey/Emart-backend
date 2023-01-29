@@ -3,16 +3,17 @@ const bcrypt = require('bcryptjs');
 const { generateToken } = require('../utils/Token');
 exports.createUser = async (req, res) => {
   try {
+    console.log(true);
     const userInfo = req.body;
 
     const hashedPassword = bcrypt.hashSync(userInfo.password);
     userInfo.password = hashedPassword;
     result = await authServices.createUserService(userInfo);
-
+    const token = await generateToken(userInfo);
     res.status(200).send({
       status: 'success',
       message: 'successfully create an user',
-      data: result,
+      data: { result, token },
     });
   } catch (error) {
     res.status(400).send({

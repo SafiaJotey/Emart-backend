@@ -1,4 +1,4 @@
-const productServices = require('../Services/product.services');
+const productServices = require('../Services/productServices');
 exports.getAllProduct = async (req, res) => {
   try {
     const page = req.query.page;
@@ -20,6 +20,24 @@ exports.getAllProduct = async (req, res) => {
     res.status(400).send({
       status: 'fail',
       message: 'Cannot get all products ',
+      error: error.message,
+    });
+  }
+};
+exports.getPopularProduct = async (req, res) => {
+  try {
+    const products = await productServices.getPopularProductService();
+
+    console.log(products);
+    res.status(200).send({
+      status: 'success',
+      message: 'successfully get all popular products',
+      data: products,
+    });
+  } catch (error) {
+    res.status(400).send({
+      status: 'fail',
+      message: 'Cannot get popular products ',
       error: error.message,
     });
   }

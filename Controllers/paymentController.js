@@ -11,6 +11,26 @@ exports.createIntent = async (req, res) => {
         enabled: true,
       },
     };
+    // exports.bookingToPay = async (req, res) => {
+    //   // console.log(req.params);
+    //   try {
+    //     const result = await paymentServices.bookingtoPayServices(
+    //       req.params.id
+    //     );
+
+    //     res.status(200).send({
+    //       status: 'success',
+    //       message: ' Successfully get  package by id',
+    //       data: result,
+    //     });
+    //   } catch (error) {
+    //     res.status(400).send({
+    //       status: 'fail',
+    //       message: 'Cannot get package',
+    //       error: error.message,
+    //     });
+    //   }
+    // };
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await paymentServices.createProductService(payment);

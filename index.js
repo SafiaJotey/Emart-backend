@@ -9,7 +9,7 @@ const port = process.env.PORT || 8000;
 
 const { connectToServer } = require('./utils/dbConnection');
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
-const productRoutes = require('./Routes/v1/product.route');
+const productRoutes = require('./Routes/v1/productRoutes');
 const reviewProductRoutes = require('./Routes/v1/reviewProduct.route');
 const authRoutes = require('./Routes/v1/auth.route');
 const paymentRoutes = require('./Routes/v1/paymentRoute');

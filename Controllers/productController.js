@@ -6,7 +6,7 @@ exports.getAllProduct = async (req, res) => {
     let products;
 
     if (page) {
-      products = await productServices.getProductServiceByPage(page, 8);
+      products = await productServices.getProductServiceByPage(page, 9);
     } else {
       products = await productServices.getProductService();
     }
